@@ -2,4 +2,10 @@
 
 require 'spec_converter'
 
-SpecConverter.start
+if ARGV.empty?
+  SpecConverter.start
+else
+  ARGV.each do |file|
+    SpecConverter.new.translate_file file
+  end
+end

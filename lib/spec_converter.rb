@@ -31,6 +31,7 @@ class SpecConverter
   end
   
   def convert_line(line)
+    convert_test_helper(line)
     convert_rspec_old_style_names(line)
     convert_dust_style(line)
     convert_test_unit_class_name(line)
@@ -41,6 +42,10 @@ class SpecConverter
   end
   
   private
+
+  def convert_test_helper(line)
+    line.gsub!(/^require (.*)test_helper'$/,'require \1spec_helper\'')
+  end
 
   def convert_def_setup(line)
     line.gsub!(/(^\s*)def setup(\s*)$/, '\1before do\2')
